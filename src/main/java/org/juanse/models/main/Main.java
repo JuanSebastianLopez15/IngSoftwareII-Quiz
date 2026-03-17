@@ -1,3 +1,7 @@
+package org.juanse.models.main;
+
+import org.juanse.models.*;
+
 // ESTUDIANTE 2 - PARTE 2: Main con ambas PCs y colores ANSI
 public class Main {
 
@@ -23,13 +27,13 @@ public class Main {
         System.out.println("  ║       ENSAMBLANDO PC GAMER       ║");
         System.out.println("  ╚══════════════════════════════════╝" + RESET);
 
-        BuilderComputadora gamerBuilder = new PCGamerBuilder();
+        IComputadoraBuilder gamerBuilder = new PCGamerBuilder();
 
         System.out.println(AMARILLO + "\n  Iniciando ensamblaje..." + RESET);
         director.construirPCGamer(gamerBuilder);
         System.out.println(VERDE + "  ✔ PC Gamer ensamblada con éxito" + RESET);
 
-        Computadora pcGamer = gamerBuilder.getResult();
+        Computadora pcGamer = gamerBuilder.getComputadora();
         imprimirEspecificaciones(pcGamer, "PC GAMER", MAGENTA);
 
         // ══════════════════════════════════════════════════════════════
@@ -40,13 +44,13 @@ public class Main {
         System.out.println("  ║      ENSAMBLANDO PC OFICINA      ║");
         System.out.println("  ╚══════════════════════════════════╝" + RESET);
 
-        BuilderComputadora oficinaBuilder = new PCOficinaBuilder();
+        IComputadoraBuilder oficinaBuilder = new PCOficinaBuilder();
 
         System.out.println(AMARILLO + "\n  Iniciando ensamblaje..." + RESET);
         director.construirPCOficina(oficinaBuilder);
         System.out.println(VERDE + "  ✔ PC Oficina ensamblada con éxito" + RESET);
 
-        Computadora pcOficina = oficinaBuilder.getResult();
+        Computadora pcOficina = oficinaBuilder.getComputadora();
         imprimirEspecificaciones(pcOficina, "PC OFICINA", CIAN);
     }
 
@@ -58,7 +62,7 @@ public class Main {
         System.out.println(CIAN    + "  RAM             : " + BLANCO + pc.ram           + RESET);
         System.out.println(CIAN    + "  Almacenamiento  : " + BLANCO + pc.almacenamiento + RESET);
         System.out.println(CIAN    + "  Tarjeta Gráfica : "
-                + (pc.tieneTarjetaGrafica ? VERDE + "✔ Sí" : ROJO + "✘ No") + RESET);
+                + (pc.tieneGrafica ? VERDE + "✔ Sí" : ROJO + "✘ No") + RESET);
         System.out.println(CIAN    + "  Luces RGB       : "
                 + (pc.tieneLucesRGB       ? VERDE + "✔ Sí" : ROJO + "✘ No") + RESET);
         System.out.println(color   + NEGRITA + "  └──────────────────────────────────┘\n" + RESET);

@@ -1,18 +1,16 @@
 package org.juanse.models;
 
-import org.juanse.models.Computadora;
-
-public class PCOficinaBuilder implements IComputadoraBuilder {
+public class PCGamerBuilder implements IComputadoraBuilder{
 
     private Computadora pc;
 
-    public PCOficinaBuilder(){
+    public PCGamerBuilder(){
         this.reset();
     }
 
     @Override
     public IComputadoraBuilder setProcesador(String procesador) {
-        this.pc.procesador= procesador;
+        this.pc.procesador = procesador;
         return this;
     }
 
@@ -24,19 +22,19 @@ public class PCOficinaBuilder implements IComputadoraBuilder {
 
     @Override
     public IComputadoraBuilder setAlmacenamiento(int almacenamiento) {
-        this.pc.almacenamiento=almacenamiento;
+        this.pc.almacenamiento= almacenamiento;
         return this;
     }
 
     @Override
     public IComputadoraBuilder setGrafica(boolean tieneGrafica) {
-        this.pc.tieneGrafica=tieneGrafica;
+        this.pc.tieneGrafica = tieneGrafica;
         return this;
     }
 
     @Override
     public IComputadoraBuilder setLucesRGB(boolean tieneLuces) {
-        this.pc.tieneLucesRGB=tieneLuces;
+        this.pc.tieneLucesRGB = tieneLuces;
         return this;
     }
 
@@ -49,7 +47,7 @@ public class PCOficinaBuilder implements IComputadoraBuilder {
     @Override
     public Computadora getComputadora() {
         Computadora resultado = this.pc;
-        this.reset();
+        this.reset();//reseteamos para poder armar otro
         return resultado;
     }
 }
