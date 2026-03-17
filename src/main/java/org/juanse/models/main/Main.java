@@ -2,69 +2,54 @@ package org.juanse.models.main;
 
 import org.juanse.models.*;
 
-// ESTUDIANTE 2 - PARTE 2: Main con ambas PCs y colores ANSI
 public class Main {
 
-    // ── Códigos de color ANSI ──────────────────────────────────────────
+    // Colores ANSI para la consola
     public static final String RESET    = "\u001B[0m";
     public static final String VERDE    = "\u001B[32m";
     public static final String CIAN     = "\u001B[36m";
     public static final String AMARILLO = "\u001B[33m";
     public static final String MAGENTA  = "\u001B[35m";
     public static final String ROJO     = "\u001B[31m";
-    public static final String BLANCO   = "\u001B[37m";
-    public static final String NEGRITA  = "\u001B[1m";
 
     public static void main(String[] args) {
 
+        // Creamos el director que va a manejar la construccion
         Director director = new Director();
 
-        // ══════════════════════════════════════════════════════════════
-        // CASO 1: PC GAMER
-        // ══════════════════════════════════════════════════════════════
-        System.out.println(MAGENTA + NEGRITA);
-        System.out.println("  ╔══════════════════════════════════╗");
-        System.out.println("  ║       ENSAMBLANDO PC GAMER       ║");
-        System.out.println("  ╚══════════════════════════════════╝" + RESET);
+        // ---- PC GAMER ----
+        System.out.println(MAGENTA + "\n=== Construyendo PC Gamer ===" + RESET);
 
+        // Le pasamos el builder gamer al director
         IComputadoraBuilder gamerBuilder = new PCGamerBuilder();
-
-        System.out.println(AMARILLO + "\n  Iniciando ensamblaje..." + RESET);
         director.construirPCGamer(gamerBuilder);
-        System.out.println(VERDE + "  ✔ PC Gamer ensamblada con éxito" + RESET);
 
+        // Obtenemos la PC ya construida y la mostramos
         Computadora pcGamer = gamerBuilder.getComputadora();
-        imprimirEspecificaciones(pcGamer, "PC GAMER", MAGENTA);
+        mostrarPC(pcGamer, "PC GAMER");
 
-        // ══════════════════════════════════════════════════════════════
-        // CASO 2: PC OFICINA
-        // ══════════════════════════════════════════════════════════════
-        System.out.println(CIAN + NEGRITA);
-        System.out.println("  ╔══════════════════════════════════╗");
-        System.out.println("  ║      ENSAMBLANDO PC OFICINA      ║");
-        System.out.println("  ╚══════════════════════════════════╝" + RESET);
+        // ---- PC OFICINA ----
+        System.out.println(CIAN + "\n=== Construyendo PC Oficina ===" + RESET);
 
+        // Mismo proceso pero con el builder de oficina
         IComputadoraBuilder oficinaBuilder = new PCOficinaBuilder();
-
-        System.out.println(AMARILLO + "\n  Iniciando ensamblaje..." + RESET);
         director.construirPCOficina(oficinaBuilder);
-        System.out.println(VERDE + "  ✔ PC Oficina ensamblada con éxito" + RESET);
 
         Computadora pcOficina = oficinaBuilder.getComputadora();
-        imprimirEspecificaciones(pcOficina, "PC OFICINA", CIAN);
+        mostrarPC(pcOficina, "PC OFICINA");
     }
 
-    // ── Método auxiliar para mostrar especificaciones ─────────────────
-    static void imprimirEspecificaciones(Computadora pc, String titulo, String color) {
-        System.out.println();
-        System.out.println(color + NEGRITA + "  ┌─ Especificaciones: " + titulo + " ─┐" + RESET);
-        System.out.println(CIAN    + "  Procesador      : " + BLANCO + pc.procesador    + RESET);
-        System.out.println(CIAN    + "  RAM             : " + BLANCO + pc.ram           + RESET);
-        System.out.println(CIAN    + "  Almacenamiento  : " + BLANCO + pc.almacenamiento + RESET);
-        System.out.println(CIAN    + "  Tarjeta Gráfica : "
-                + (pc.tieneGrafica ? VERDE + "✔ Sí" : ROJO + "✘ No") + RESET);
-        System.out.println(CIAN    + "  Luces RGB       : "
-                + (pc.tieneLucesRGB       ? VERDE + "✔ Sí" : ROJO + "✘ No") + RESET);
-        System.out.println(color   + NEGRITA + "  └──────────────────────────────────┘\n" + RESET);
+    // Metodo para imprimir las especificaciones de una PC
+    static void mostrarPC(Computadora pc, String nombre) {
+        System.out.println(AMARILLO + "\nEspecificaciones - " + nombre + RESET);
+        System.out.println(CIAN + "Procesador     : " + RESET + pc.procesador);
+        System.out.println(CIAN + "RAM            : " + RESET + pc.ram);
+        System.out.println(CIAN + "Almacenamiento : " + RESET + pc.almacenamiento);
+
+        // Mostramos en verde si tiene el componente, en rojo si no
+        System.out.println(CIAN + "Tarjeta Grafica: " + RESET
+                + (pc.tieneGrafica  ? VERDE + "Si" : ROJO + "No") + RESET);
+        System.out.println(CIAN + "Luces RGB      : " + RESET
+                + (pc.tieneLucesRGB ? VERDE + "Si" : ROJO + "No") + RESET);
     }
 }
